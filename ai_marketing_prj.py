@@ -30,6 +30,22 @@ title_html = """
 
 st.markdown(title_html, unsafe_allow_html=True)
 
+import zipfile
+
+# Path to your zip file
+zip_file_path = 'final_data.zip'
+
+# Name of the CSV file inside the zip file
+csv_file_name = 'final_data.csv'
+
+# Open the zip file
+with zipfile.ZipFile(zip_file_path, 'r') as z:
+    # Open the CSV file within the zip file
+    with z.open(csv_file_name) as csv_file:
+        # Read the CSV file into a DataFrame
+        dftemp = pd.read_csv(csv_file)
+
+
 # Set up logging
 import logging
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -38,7 +54,7 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %
 @st.cache_data
 def load_data():
     df1 = pd.read_csv(r"sentimentdata.csv")
-    df2 = pd.read_csv(r"final_data.csv")
+    df2 = dftemp.copy()
     return df1, df2
 
 df1, df2 = load_data()
