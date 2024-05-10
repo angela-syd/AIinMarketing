@@ -37,8 +37,8 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %
 # Load datasets
 @st.cache_data
 def load_data():
-    df1 = pd.read_csv(r"C:\Users\X1 Carbon\Downloads\sentimentdata.csv")
-    df2 = pd.read_csv(r"C:\Users\X1 Carbon\Downloads\final_data.csv")
+    df1 = pd.read_csv(r"sentimentdata.csv")
+    df2 = pd.read_csv(r"final_data.csv")
     return df1, df2
 
 df1, df2 = load_data()
