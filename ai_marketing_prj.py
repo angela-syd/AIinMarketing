@@ -185,10 +185,6 @@ dataset_choice = st.sidebar.selectbox("Choose the dataset for analysis:", ["Proc
 if dataset_choice == "Raw Data":
     analysis_type = st.sidebar.radio("Select analysis type:", ["Summary", "Raw Data Overview"])
 
-    if analysis_type == "Raw Data Overview":
-        st.header("Sample Data")
-        st.dataframe(df2.head(20)) 
-
     if analysis_type == "Summary":
         # Plot the distribution using a bar plot
         # Check the distribution of sentiment categories
@@ -221,6 +217,10 @@ if dataset_choice == "Raw Data":
         plt.xticks(rotation=0)
         plt.tight_layout()
         st.pyplot(plt)  # Display the plot
+        
+    if analysis_type == "Raw Data Overview":
+        st.header("Sample Data")
+        st.dataframe(df2.head(20)) 
 
 
 if dataset_choice == "Processed Data":
