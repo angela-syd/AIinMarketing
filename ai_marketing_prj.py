@@ -217,9 +217,11 @@ if dataset_choice == "Raw Data":
         plt.xticks(rotation=0)
         plt.tight_layout()
         st.pyplot(plt)  # Display the plot
+        
     if analysis_type == "Raw Data Overview":
         st.header("Sample Data")
         st.dataframe(df2.head(20)) 
+
 
 if dataset_choice == "Processed Data":
     analysis_type = st.sidebar.radio("Know your Customers", ["Sentiment Analysis", "Customer Feedback and Reviews"])
