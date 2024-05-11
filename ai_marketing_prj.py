@@ -155,19 +155,7 @@ def review_cleaning(text):
 # Clean the reviewText column
 df2['reviewText'] = df2['reviewText'].apply(review_cleaning)
 
-import nltk
-from nltk.corpus import stopwords
-nltk.download('stopwords')
 
-# Define stopwords
-stop_words = set(stopwords.words('english'))
-# Function to remove stopwords
-def remove_stopwords(text):
-    """Custom function to remove the stopwords"""
-    return " ".join([word for word in str(text).split() if word not in STOPWORDS])
-
-# Apply stopword removal and overwrite reviewText_preprocessed column
-df2["reviewText"] = df2["reviewText"].apply(lambda text: remove_stopwords(text))
 
 #Spell Checker
 from spellchecker import SpellChecker
