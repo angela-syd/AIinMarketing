@@ -89,14 +89,27 @@ df22.drop(columns=["reviewTime"], inplace=True)
 # Dropdown menus for brand, year, and month in a single row
 col1, col2, col3 = st.columns(3)
 with col1:
-    brands = ['All'] + list(df11['brand'].unique())
+    brands = ['All'] + sorted(df22['brand'].unique().tolist())
     selected_brand = st.selectbox('Select Brand:', brands)
+
+# Update year based on selected brand
 with col2:
-    years = ['All'] + list(df11['year'].unique())
+    if selected_brand != 'All':
+        years = ['All'] + sorted(df22[df22['brand'] == selected_brand]['year'].unique().tolist())
+    else:
+        years = ['All'] + sorted(df22['year'].unique().tolist())
     selected_year = st.selectbox('Select Year:', years)
+
+# Update month based on selected brand and year
 with col3:
-    months = ['All'] + list(df11['month'].unique())
+    if selected_brand != 'All' and selected_year != 'All':
+        months = ['All'] + sorted(df22[(df22['brand'] == selected_brand) & (df22['year'] == selected_year)]['month'].unique().tolist())
+    elif selected_year != 'All':
+        months = ['All'] + sorted(df22[df22['year'] == selected_year]['month'].unique().tolist())
+    else:
+        months = ['All'] + sorted(df22['month'].unique().tolist())
     selected_month = st.selectbox('Select Month:', months)
+
 
 # Applying filters to the data
 # Filter by brand
@@ -116,6 +129,7 @@ if selected_year != 'All':
 if selected_month != 'All':
     df1 = df1[df1['month'] == selected_month]
     df2 = df2[df2['month'] == selected_month]
+
     
     
 ########Data Preprocessing
