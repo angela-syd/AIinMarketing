@@ -156,7 +156,6 @@ def review_cleaning(text):
 df2['reviewText'] = df2['reviewText'].apply(review_cleaning)
 
 import nltk
-from nltk.stem import PorterStemmer
 nltk.download('stopwords')
 
 # Define stopwords
